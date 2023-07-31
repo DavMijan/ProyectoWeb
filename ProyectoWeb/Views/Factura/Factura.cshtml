@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Factura";
+}
+
+<h1>Factura</h1>
+
+<div>
+    <h4>Datos del Cliente</h4>
+    <p><strong>Nombre:</strong> @ViewBag.Cliente.NombreCliente</p>
+    <p><strong>Correo:</strong> @ViewBag.Cliente.CorreoCliente</p>
+    <p><strong>Dirección:</strong> @ViewBag.Cliente.DireccionCliente</p>
+</div>
+
+<div>
+    <h4>Datos del Medidor</h4>
+    <p><strong>NIS:</strong> @ViewBag.Medidor.Nis</p>
+    <p><strong>Ubicación:</strong> @ViewBag.Medidor.Ubicacion</p>
+</div>
+
+<div>
+    <h4>Datos de Consumo</h4>
+    <p><strong>Consumo Anterior:</strong> @ViewBag.ConsumoAnterior</p>
+    <p><strong>Consumo Actual:</strong> @ViewBag.ConsumoActual</p>
+    <p><strong>Consumo Calculado:</strong> @ViewBag.ConsumoCalculado</p>
+    <p><strong>Total a Pagar:</strong> @ViewBag.PrecioTotal</p>
+</div>
+
+<form id="pdfForm" asp-controller="Factura" asp-action="GenerarLectura" method="post">
+    <input type="hidden" name="idMedidor" value="@ViewBag.Medidor.Id" />
+    <input type="hidden" name="lecturaCalculada" value="@ViewBag.ConsumoCalculado" />
+    <input type="date" name="fechaGeneracion" required />
+    <input type="file" id="fileInput" style="display: none" />
+    <button type="button" onclick="selectSaveLocation()" class="btn btn-primary">Guardar Factura</button>
+    <button type="submit" class="btn btn-primary">Generar Lectura</button>
+</form>
+
+<script>
+    function selectSaveLocation() {
+        // Abrir el cuadro de diálogo de selección de archivos
+        document.getElementById('fileInput').click();
+    }
+
+    // Capturar la ruta seleccionada por el usuario
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        var file = event.target.files[0];
+        if (file) {
+            var form = document.getElementById('pdfForm');
+            form.action = '@Url.Action("GenerarLectura", "Factura", new { filePath = "" })' + '?filePath=' + encodeURIComponent(file.name);
+            form.submit();
+        }
+    });
+</script>
+
+<a asp-action="Index">Volver</a>

@@ -1,0 +1,140 @@
+﻿@using Microsoft.AspNetCore.Authorization
+
+@{
+    bool tieneRol = User.IsInRole("1");
+    bool tieneRol2 = User.IsInRole("2");
+    bool tieneRol3 = User.IsInRole("3");
+    bool tieneRol4 = User.IsInRole("4");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProyectoWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProyectoWeb.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+
+
+                @if (tieneRol)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Alertas" asp-action="Index">Alertas</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Detalles" asp-action="Index">Detalles</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="DimTiempoes" asp-action="Index">DimTiempoes</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Index">Empleados</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Encabezados" asp-action="Index">Encabezados</a></li
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Lecturas" asp-action="Index">Lecturas</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Medidores" asp-action="Index">Medidores</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Tarifas" asp-action="Index">Tarifas</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="TiposClientes" asp-action="Index">Tipos Clientes</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="TiposMedidores" asp-action="Index">Tipos Medidores</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="TiposUsuarios" asp-action="Index">Tipos Usuarios</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a></li>
+
+                        </ul>
+                    </div>
+                }
+                @if (tieneRol2)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Factura" asp-action="Index">Factura Prueba</a></li>
+                        </ul>
+                    </div>
+                }
+                @if (tieneRol3)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Alertas" asp-action="Index">Poner</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Rutas html</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Detalles" asp-action="Index">Para Clientes</a></li>
+                        </ul>
+                    </div>
+                }
+                @if (tieneRol4)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Medidores" asp-action="Index">Registrar Medidor </a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="Index">Registrar Empleado</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Registrar Cliente</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Registrar Usuarios</a></li>
+                        </ul>
+                    </div>
+                }
+                <a class="navbar-brand ms-2" asp-area="" asp-controller="Home" asp-action="Index">ProyectoWeb</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Acerca De</a>
+                        </li>
+                        <ul class="justify-content-end">
+                        </ul>
+                            @if (!(tieneRol || tieneRol2 || tieneRol3 || tieneRol4))
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Inicio" asp-action="IniciarSesion">Iniciar Sesion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Inicio" asp-action="Registrarse">Registrarse</a>
+                        </li>
+                            }
+
+                            @if (tieneRol || tieneRol2 || tieneRol3 || tieneRol4)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CerrarSesion">Cerrar Sesión</a>
+                                </li>
+                            }
+                        </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - ProyectoWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

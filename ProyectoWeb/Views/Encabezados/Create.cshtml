@@ -1,0 +1,49 @@
+﻿@model ProyectoWeb.Models.Encabezados
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Encabezados</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FechaEncabezado" class="control-label"></label>
+                <input asp-for="FechaEncabezado" class="form-control" />
+                <span asp-validation-for="FechaEncabezado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMedidor" class="control-label"></label>
+                <select asp-for="IdMedidor" class="form-control" asp-items="ViewBag.IdMedidor"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaID" class="control-label"></label>
+                <select asp-for="FechaID" class="form-control" asp-items="ViewBag.FechaID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoEncabezado" class="control-label"></label>
+                <select asp-for="EstadoEncabezado" class="form-control">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+                <span asp-validation-for="EstadoEncabezado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
